@@ -1,0 +1,74 @@
+<!-- 
+
+Hey there hacker,
+
+This site is deliberately designed to be easy for bot to interact
+and to do most of the things on client side to reduce http calls to server making the data available on the client side.
+So I tried my best to obfuscate the javascript but if you are able to make sense of it. please do let me know :)
+
+Thank you...
+
+██████  ██████  
+██   ██ ██   ██ 
+██   ██ ██████  
+██   ██ ██   ██ 
+██████  ██   ██ 
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../assets/finance.ico" type="image/x-icon">
+  <title>Financial Records - Robbery Investigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Financial Records Section</h1>
+  </header>
+  <nav id="nav" name="nav">
+    <ul id="navlist" name="navlist">
+      <li><a id="hometab" name="hometab" href="../index.html">Home</a></li>
+      <li><a id="profiletab" name="profiletab" href="profile.html">Profile</a></li>
+      <li><a id="financetab" name="financetab" href="finance.html">Finance</a></li>
+      <li><a id="traveltab" name="traveltab" href="travel.html">Travel</a></li>
+      <li><a id="timelinetab" name="timelinetab" href="timeline.html">Timeline</a></li>
+      <li><a id="faqtab" name="faqtab" href="faq.html">FAQs</a></li>
+      <li><a id="helptab" name="helptab" href="help.html">Help</a></li>
+      <li><a id="resourcestab" name="resourcestab" href="resources.html">Resources</a></li>
+    </ul>
+  </nav>
+  <div id="app">
+    <label for="idType">ID Type:</label>
+    <p>
+      <label for="idType">Social Security Number</label>
+      <input type="radio" name="idType" id="SSN" value="SSN">
+    </p>
+    <p>
+      <label for="idType">Passport Number</label>
+      <input type="radio" name="idType" id="PN" value="PN">
+    </p>
+    <p>
+      <label for="idType">Account Number</label>
+      <input type="radio" name="idType" id="AN" value="AN">
+    </p>
+    <p>
+      <input type="text" name="idValue" id="idValue">
+    </p>
+    <p>
+      <input type="button" value="Search" id="btnSearch" name="btnSearch">
+    </p>
+  </div>
+  <div id="results">
+  </div>
+  <script type="module" src="finance.js"></script>
+</body>
+
+</html>

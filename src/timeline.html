@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../assets/calendar.ico" type="image/x-icon">
+    <title>Travel Records - Botathon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <style>
+        .r-title {
+            margin-top: var(--rTitleMarginTop, 0) !important;
+            margin-bottom: var(--rTitleMarginBottom, 0) !important;
+        }
+
+        p:not([class]) {
+            line-height: var(--cssTypographyLineHeight, 1.78);
+            margin-top: var(--cssTypographyBasicMargin, 1em);
+            margin-bottom: 0;
+        }
+
+        p:not([class]):first-child {
+            margin-top: 0;
+        }
+
+        .text {
+            display: var(--textDisplay, inline-flex);
+            font-size: var(--textFontSize, 1rem);
+        }
+
+        .time {
+            display: var(--timeDisplay, inline-flex);
+        }
+
+        .time__month {
+            margin-left: var(--timelineMounthMarginLeft, .25em);
+        }
+
+        .time {
+            padding: var(--timePadding, .25rem 1.25rem .25rem);
+            background-color: var(--timeBackgroundColor, #f0f0f0);
+
+            font-size: var(--timeFontSize, .75rem);
+            font-weight: var(--timeFontWeight, 700);
+            text-transform: var(--timeTextTransform, uppercase);
+            color: var(--timeColor, currentColor);
+        }
+
+        .card {
+            padding: var(--timelineCardPadding, 1.5rem 1.5rem 1.25rem);
+        }
+
+        .card__content {
+            margin-top: var(--cardContentMarginTop, .5rem);
+        }
+
+        .card {
+            border-radius: var(--timelineCardBorderRadius, 2px);
+            border-left: var(--timelineCardBorderLeftWidth, 3px) solid var(--timelineCardBorderLeftColor, var(--uiTimelineMainColor));
+            box-shadow: var(--timelineCardBoxShadow, 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24));
+            background-color: var(--timelineCardBackgroundColor, #fff);
+        }
+
+        .card__title {
+            --rTitleMarginTop: var(--cardTitleMarginTop, 1rem);
+            font-size: var(--cardTitleFontSize, 1.25rem);
+        }
+
+
+        .timeline {
+            display: var(--timelineDisplay, grid);
+            grid-row-gap: var(--timelineGroupsGap, 2rem);
+        }
+
+        .timeline__year {
+            margin-bottom: 1.25rem;
+            /* 1 */
+        }
+
+        .timeline__cards {
+            display: var(--timeloneCardsDisplay, grid);
+            grid-row-gap: var(--timeloneCardsGap, 1.5rem);
+        }
+
+        .timeline {
+            --uiTimelineMainColor: var(--timelineMainColor, #222);
+            --uiTimelineSecondaryColor: var(--timelineSecondaryColor, #fff);
+
+            border-left: var(--timelineLineWidth, 3px) solid var(--timelineLineBackgroundColor, var(--uiTimelineMainColor));
+            padding-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline__year {
+            --timePadding: var(--timelineYearPadding, .5rem 1.5rem);
+            --timeColor: var(--uiTimelineSecondaryColor);
+            --timeBackgroundColor: var(--uiTimelineMainColor);
+            --timeFontWeight: var(--timelineYearFontWeight, 400);
+        }
+
+        .timeline__card {
+            position: relative;
+            margin-left: var(--timelineCardLineGap, 1rem);
+        }
+
+        .timeline__cards {
+            overflow: hidden;
+            padding-top: .25rem;
+            /* 1 */
+            padding-bottom: .25rem;
+            /* 1 */
+        }
+
+        .timeline__card::before {
+            content: "";
+            width: 100%;
+            height: var(--timelineCardLineWidth, 2px);
+            background-color: var(--timelineCardLineBackgroundColor, var(--uiTimelineMainColor));
+
+            position: absolute;
+            top: var(--timelineCardLineTop, 1rem);
+            left: -50%;
+            z-index: -1;
+        }
+
+        .timeline {
+            --timelineMainColor: #11385b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
+            color: #2c3e50;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            text-align: left !important;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        .page {
+            max-width: 47rem;
+            padding: 0rem 1rem 2rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        li {
+            text-align: left !important;
+        }
+
+
+        .substack {
+            border: 1px solid #EEE;
+            background-color: #fff;
+            width: 100%;
+            max-width: 480px;
+            height: 280px;
+            margin: 1rem auto;
+            ;
+        }
+
+        .linktr__goal {
+            border: 2px solid rgb(255, 255, 255);
+            background-color: rgb(255, 255, 255);
+            color: rgb(8, 49, 112);
+            box-shadow: rgb(8 49 112 / 24%) 0px 2px 8px 0px;
+            border-radius: 2rem;
+            padding: .5rem 1.25rem;
+        }
+
+        .r-link {
+            --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
+            --uirLinkTextColor: var(--rLinkTextColor);
+            --uirLinkTextDecoration: var(--rLinkTextDecoration, none);
+
+            display: var(--uirLinkDisplay) !important;
+            color: var(--uirLinkTextColor) !important;
+            text-decoration: var(--uirLinkTextDecoration) !important;
+        }
+
+        .eyes {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Travel Section</h1>
+    </header>
+    <nav id="nav" name="nav">
+        <ul id="navlist" name="navlist">
+            <li><a id="hometab" name="hometab" href="../index.html">Home</a></li>
+            <li><a id="profiletab" name="profiletab" href="profile.html">Profile</a></li>
+            <li><a id="financetab" name="financetab" href="finance.html">Finance</a></li>
+            <li><a id="traveltab" name="traveltab" href="travel.html">Travel</a></li>
+            <li><a id="timelinetab" name="timelinetab" href="timeline.html">Timeline</a></li>
+            <li><a id="faqtab" name="faqtab" href="faq.html">FAQs</a></li>
+            <li><a id="helptab" name="helptab" href="help.html">Help</a></li>
+            <li><a id="resourcestab" name="resourcestab" href="resources.html">Resources</a></li>
+        </ul>
+    </nav>
+    <div id="app">
+        <div class="page">
+            <div class="timeline">
+                <div class="timeline__group">
+                    <span class="timeline__year time" aria-hidden="true">Botathon</span>
+                    <div class="timeline__cards">
+
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-01-12">
+                                    <span class="time__day">12</span>
+                                    <span class="time__month">Jan</span>
+                                </time>
+                                <h3>🎉🎈Botathon Kick-Off🎈🎉</h3>
+                            </header>
+                            <div class="card__content">
+                                <ul>
+                                    <li>Talk from Automation Anywhere Team</li>
+                                    <li>Usecase discussions</li>
+                                    <li>Initiate Phase I</li>
+                                    <li>Backlog collection</li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-01-13">
+                                    <span class="time__day">13</span>
+                                    <span class="time__month">Jan</span>
+                                </time>
+                                <h3 class="card__title r-title">Phase II Starts</h3>
+                            </header>
+                            <div class="card__content">
+                                <!-- <p>Identify Shady transactions of the suspects.</p> -->
+                            </div>
+                        </div>
+
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-01-14">
+                                    <span class="time__day">14</span>
+                                    <span class="time__month">Jan</span>
+                                </time>
+                                <h3 class="card__title r-title">Phase III Starts</h3>
+                            </header>
+                            <div class="card__content">
+                                <p>Phase I solution reveal <span class="eyes">👀</span></p>
+                            </div>
+                        </div>
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-01-17">
+                                    <span class="time__day">17</span>
+                                    <span class="time__month">Jan</span>
+                                </time>
+                                <h3 class="card__title r-title">End of Phase II</h3>
+                            </header>
+                            <div class="card__content">
+                                <p>Phase II solution reveal <span class="eyes">👀</span></p>
+                            </div>
+                        </div>
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-01-18">
+                                    <span class="time__day">18</span>
+                                    <span class="time__month">Jan</span>
+                                </time>
+                                <h3 class="card__title r-title">End of Round III</h3>
+                            </header>
+                            <div class="card__content">
+                                <p>Phase III Solution reveal <span class="eyes">👀</span></p>
+                            </div>
+                        </div>
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-01-19">
+                                    <span class="time__day">19</span>
+                                    <span class="time__month">Jan</span>
+                                </time>
+                                <h3 class="card__title r-title">Closing ceremony</h3>
+                            </header>
+                            <div class="card__content">
+                                <ul>
+                                    <li>Quiz</li>
+                                    <li>Backlog Collection</li>
+                                    <li>Feedback</li>
+                                    <li>Closing ceremony of Botathon</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="timeline__card card">
+                            <header class="card__header">
+                                <time class="time" datetime="2021-02-07">
+                                    <span class="time__day">7</span>
+                                    <span class="time__month">Feb 🌹</span>
+                                </time>
+                                <h3 class="card__title r-title">Results🥇🥈🥉</h3>
+                            </header>
+                            <div class="card__content">
+                                <p>Results will be announced</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
